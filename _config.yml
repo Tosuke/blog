@@ -5,7 +5,7 @@
 # Site
 title: Tosuke's blog
 subtitle: 役に立(つ/たない)技術情報やポエム
-description: 書くことがあったら書く
+description: 書きたいときに書いてます
 author: Tosuke
 language: ja
 timezone: Asia/Tokyo
@@ -63,7 +63,7 @@ pagination_dir: page
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: landscape
+theme: ingenuous
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
@@ -81,7 +81,7 @@ autolinker:
   email: false
   tel: false
   twitter: true
-  hashtag: twitter
+  hashtag: false
 
 math:
   engine: 'katex'

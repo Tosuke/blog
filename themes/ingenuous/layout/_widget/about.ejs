@@ -5,8 +5,22 @@
       <% if (theme.about.author) { %>
         <p> <%- config.author %> </p>
       <% } %>
+      <% if (theme.about.avatar) { %>
+        <div class="avatar">
+          <img src="<%=theme.avatar%>">
+        </div>
+      <% } %>
       <% if (theme.about.twitter) { %>
-        <p> <a href="http://twitter.com/<%- theme.twitter %>">@<%- theme.twitter %></a> </p>
+        <p> <a href="http://twitter.com/<%=theme.twitter %>" target="_blank" rel="external">Twitter</a> </p>
+      <% } %>
+      <% if (theme.about.github) { %>
+        <p> <a href="https://github.com/<%=theme.github %>" target="_blank" rel="external">Github</a> </p>
+      <% } %>
+      <% if (theme.about.qiita) { %>
+        <p> <a href="http://qiita.com/<%=theme.qiita %>" target="_blank" rel="external">Qiita</a> </p>
+      <% } %>
+      <% if (theme.about.wishlist) { %>
+        <p> <a href="https://www.amazon.co.jp/gp/registry/wishlist/<%=theme.wishlist %>" target="_blank" rel="external">Amazon wishlist</a> </p>
       <% } %>
       </p>
       <% if (theme.about.aboutme) { %>

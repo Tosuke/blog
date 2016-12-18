@@ -2,7 +2,7 @@
 menu:
   Home: /
   Archives: /archives
-rss: /atom.xml
+rss: /blog/atom.xml
 
 # Content
 excerpt_link: Read More
@@ -17,24 +17,32 @@ search: true
 # Widgets
 widgets:
 - about
+- recent_posts
 - category
 - tag
 - tagcloud
 - archive
-- recent_posts
 
 # Miscellaneous
 google_analytics:
 favicon: /favicon.png
-twitter:
+avatar: https://www.gravatar.com/avatar/21a281f9524c64d841a12cbc15fec833?s=100
+twitter: amakoprg
+github: Tosuke
+qiita: tosuke
+wishlist: 3GACITWXQKT9J
 google_plus:
 fb_admins:
 fb_app_id:
 
-aboutme:
+aboutme: "D言語が好きなただの高校生です"
 about:
   author: true
+  avatar: true
   twitter: true
+  github: true
+  qiita: false
+  wishlist: true
   aboutme: true
   description: true
 
