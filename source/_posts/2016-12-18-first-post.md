@@ -2,7 +2,7 @@
 title: first-post
 date: 2016-12-18 13:21:33
 category:
-  - others
+  - uncategorized
 tags:
   - blog
 ---
