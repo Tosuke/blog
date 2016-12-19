@@ -11,9 +11,6 @@
       </header>
     <% } %>
     <div class="article-entry" itemprop="articleBody">
-      <% if (page.layout != 'about'){ %>
-        <%- partial('post/sharing') %>
-      <% } %>
       <% if (post.excerpt && index){ %>
         <%- post.excerpt %>
         <% if (theme.excerpt_link){ %>
