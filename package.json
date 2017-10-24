@@ -11,12 +11,17 @@
     "precommit": "lint-staged"
   },
   "lint-staged": {
-    "*.md": ["textlint --fix", "textlint", "git add"]
+    "*.md": [
+      "textlint --fix",
+      "textlint",
+      "git add"
+    ]
   },
   "devDependencies": {
     "husky": "^0.14.3",
     "lint-staged": "^4.3.0",
     "textlint": "^8.2.1",
+    "textlint-filter-rule-comments": "^1.2.2",
     "textlint-rule-preset-ja-technical-writing": "^0.1.3"
   }
 }
