@@ -1,0 +1,22 @@
+{
+  "name": "blog",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "ssh://git@github.com/Tosuke/blog.git",
+  "author": "Tosuke <tasukeprg@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "lint": "textlint 'content/**/*.md'",
+    "fix": "textlint --fix 'cotent/**/*.md'",
+    "precommit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.md": ["textlint --fix", "textlint", "git add"]
+  },
+  "devDependencies": {
+    "husky": "^0.14.3",
+    "lint-staged": "^4.3.0",
+    "textlint": "^8.2.1",
+    "textlint-rule-preset-ja-technical-writing": "^0.1.3"
+  }
+}

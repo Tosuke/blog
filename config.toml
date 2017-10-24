@@ -1,0 +1,13 @@
+baseURL = "http://example.org/"
+languageCode = "en-us"
+title = "Tosuke's weblog"
+theme = "vienna"
+hasCJKLanguage = "true"
+
+[params]
+  twitter = "_tosuke_"
+  github = "Tosuke"
+  disqus = "tosuke-blog"
+  author = "tosuke"
+  avatar = "https://static.tosukeapps.tk/iona_v4_x128.png"
+  bio = "プログラミングこーこーせー"

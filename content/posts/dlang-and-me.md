@@ -28,14 +28,15 @@ tags:
 
 # D言語で言語処理系
 
-smilebasicのPC版処理系として有名なものとして[otyaSMILEBASIC](https://github.com/otya128/otyaSMILEBASIC)があるが、ソースが全体的に魔界で(パーサが手書きされていたりする)、バグ修正や機能追加をしたくても難しかった。
+smilebasicのPC版処理系として有名なものには[otyaSMILEBASIC](https://github.com/otya128/otyaSMILEBASIC)がある。
+しかしソースが全体的に魔界で(パーサが手書きされていたりする)、バグ修正や機能追加をしたくても難しかった。
 そこで私は、「ソースの読めるsmilebasic処理系を作ろう」と思いたち、[tosukeSmileBasic](https://github.com/Tosuke/tosukeSmileBasic)を作りはじめた。
 パーサには[pegged](https://code.dlang.org/packages/pegged)を使い、ハックしやすく扱いやすい、言うなれば「ぼくの考えたさいきょうのsmilebasic」が完成する。
 はずだった。
 
 ## 「D言語は仕様はいいけどライブラリに恵まれない」
 ところがこのpeggedがかなりの問題児だった。
-問題として
+問題として。
 - パーサ内に書けるセマンティックアクションの制限が強い(ParseTreeを返す必要がある)
 - 「どの非終端記号でパースされたのか」を示す情報が文字列で渡されるので、Dの型システムの恩恵を受けられない
 - パーサコンビネータの生成した中間の木もそのまま渡されるので、それを弾くために処理が煩雑になる

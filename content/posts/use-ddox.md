@@ -8,8 +8,8 @@ tags:
   - lifelog
 ---
 
-皆さん、D言語使ってますか？
-ドキュメント書いてますか？(ブーメラン)
+皆さん、D言語使ってますか
+ドキュメント書いてますか(ブーメラン)
 
 # ddoxとは
 
@@ -26,19 +26,19 @@ ddoxで利用するテーマを変更する場合、dub.jsonに`"-ddoxTool": "sc
 ```
 $ dub run --build=ddox
 ```
-![scod](scod.jpg)
+{{<figure src="https://static.tosukeapps.tk/use-ddox/scod.jpg" title="scod">}}
 
-いい感じですね。また、
+いい感じですね。
 ```
 $ dub build --build=ddox
 ```
-とすることでdocsフォルダに静的にページを生成してくれます。
+また、このようにすることでdocsフォルダに静的にページを生成してくれます。
 
 # 落とし穴
 
-このように非常に便利なddoxですが、大きな落とし穴があります。
+非常に便利なddoxですが、大きな落とし穴があります。
 もし、あなたが複雑な設定をするために自力でddoxを利用する設定を書いたとします。
-例えば、
+例えば、このようにです。
 ``` json
 "buildTypes": {
   "ddoc": {
@@ -53,7 +53,8 @@ $ dub build --build=ddox
 }
 ```
 これをdub.jsonに追記し、`$ dub build --build=ddoc`を実行したとします。
-その場合、このようなエラーを吐くことがあります(私はこれにハマりました)
+その場合、このようなエラーを吐くことがあります。
+私はこれにハマりました。
 ```
 core.exception.RangeError@../../.dub/packages/ddox-0.15.18/ddox/source/ddox/parsers/jsonparser.d(469): Range violation
 ----------------
@@ -94,7 +95,7 @@ core.exception.RangeError@../../.dub/packages/ddox-0.15.18/ddox/source/ddox/pars
 ```
 これはddox側に問題があるようです。
 あまり推奨できる方法ではありませんが、パッケージを直接書きかえることで対処することができます。
-.dub/packages下にある使用しているddoxパッケージの中、source/parsers/jsonparser.dの469行目付近
+.dub/packages下にある使用しているddoxパッケージの中、source/parsers/jsonparser.dの469行目付近にこのような関数があります。
 ```d
 void parseAttributes(ref string[] dst, const(string)[] keywords)
 {
@@ -110,7 +111,6 @@ void parseAttributes(ref string[] dst, const(string)[] keywords)
 	}
 }
 ```
-を
 ```d
 void parseAttributes(ref string[] dst, const(string)[] keywords)
 {
@@ -126,11 +126,12 @@ void parseAttributes(ref string[] dst, const(string)[] keywords)
 	}
 }
 ```
-に書きかえることでこれを防ぐことができます。
+それをこのように書きかえることでこれを防ぐことができます。
 
 # あとがき・怨嗟の声
 
-はっきり言って、Rejected Software製のソフトウェア・ライブラリの質は低いと思います。
-dubやvibe.dなどでD言語の存在感を高めた功績は大きいですが、ソフトウェアの品質が低いことでD言語に対して負の影響がないか心配です。(個人的には、dubは遅いパッケージレジストリに毎回リクエストするなど問題が多く、vibe.dもカジュアルにnullを返すなどの設計上の問題がある)
-私はD言語が流行らない理由としてライブラリの不足も一因であると考えていますが、だからといって品質の低いライブラリを無闇に増やすのも問題だと思います。
-D言語は本当に素晴しい言語だと思います。この言語が多くの人々に末長く親しまれることを願っています。
+はっきり言って、Rejected Software製のソフトウェア・ライブラリの質は低いです。
+dubやvibe.dなどでD言語の存在感を高めた功績は大きいですが、ソフトウェアの品質が低いことでD言語に対して負の影響がないか心配です。
+ちなみにdubは遅いパッケージレジストリに毎回リクエストするなどの問題があり、vibe.dにもカジュアルにnullを返すなどの設計上の問題があります。
+私はD言語が流行らない理由としてライブラリの不足も一因であると考えていますが、だからといって品質の低いライブラリを無闇に増やすのも問題です。
+D言語は本当に素晴しい言語です。この言語が多くの人々に末長く親しまれることを願っています。
