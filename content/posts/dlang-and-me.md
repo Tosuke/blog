@@ -1,6 +1,6 @@
 ---
 title: D言語と私
-date: 2017-05-04 01:01:45
+date: 2017-05-04T01:01:45+09:00
 categories:
   - poem
   - technology

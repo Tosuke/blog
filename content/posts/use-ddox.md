@@ -1,6 +1,6 @@
 ---
 title: ddoxを使う
-date: 2017-03-21 23:35:34
+date: 2017-03-21T23:35:34+09:00
 categories:
   - technology
   - dlang

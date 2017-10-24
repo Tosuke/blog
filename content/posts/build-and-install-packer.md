@@ -1,6 +1,6 @@
 ---
 title: packerをビルドしてインストール
-date: 2016-12-19 23:01:04
+date: 2016-12-19T23:01:04+09:00
 categories:
   - technology
   - linux
