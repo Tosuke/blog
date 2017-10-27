@@ -8,9 +8,7 @@ tags:
   - math
 ---
 
-{{<mathjax>}}
-
-<div class="miiverse-post" lang="ja" data-miiverse-cite="https://miiverse.nintendo.net/posts/AYMHAAADAAADV44GjdVvow" data-miiverse-embedded-version="1"><noscript>You must have JavaScript enabled on your device to view Miiverse posts that have been embedded in a website. <a class="miiverse-post-link" href="https://miiverse.nintendo.net/posts/AYMHAAADAAADV44GjdVvow">View post in Miiverse.</a></noscript></div><script async src="https://miiverse.nintendo.net/js/embedded.min.js" charset="utf-8"></script>
+<div class="miiverse-post" lang="ja" data-miiverse-cite="https://miiverse.nintendo.net/posts/AYMHAAADAAADV44GjdVvow" data-miiverse-embedded-version="1"></div><script async src="https://miiverse.nintendo.net/js/embedded.min.js" charset="utf-8"></script>
 プチコン界隈ではこの投稿が衝撃をもたらしたとかもたらしてないとかという話ですが、今回はこの解析の方法について書きます。
 なお、この解析結果はプチコン3号限定です。(プチコンBIGはまた別の乱数生成アルゴリズムを採用しているらしい)
 
