@@ -5,23 +5,19 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const { slug } = req.query;
     if (typeof slug !== 'string') throw new Error('invalid param');
-    const source = await postRepository.fetchSource(slug);
-    if (source == null) {
-      res.status(404);
+    const content = await postRepository.fetchContent(slug);
+    if (content == null) {
+      res.status(404).json({
+        error: 'not found'
+      });
       return;
     }
-    res.setHeader('Content-Type', 'text/html');
-    if (source.type === 'html') {
-      res.send(source.raw);
-      return;
-    } else {
-      res.status(404);
-      return;
-    }
+    res.json(content);
   } catch (e) {
     res.status(500);
-    res.setHeader('Content-Type', 'text/plain');
-    res.send(e instanceof Error ? `${e.name}: ${e.message}` : 'Internal Server Error');
+    res.json({
+      error: e instanceof Error ? `${e.name}: ${e.message}` : 'Internal Server Error'
+    });
   } finally {
     res.end();
   }

@@ -1,36 +1,14 @@
-import { PostEntry, PostSource, PostDoc } from './models';
-import dayjs from 'dayjs';
-import { http } from './http';
+import { PostEntry, PostContent } from './models';
+import ky from 'ky-universal';
+import { posts } from './posts';
 
-const posts: PostDoc[] = [
-  {
-    slug: 'post1',
-    createdAt: dayjs('2020-02-17'),
-    updatedAt: dayjs('2020-02-17'),
-    tags: [],
-    title: 'ラジオネーム“おもしろくん”さんからのお便り',
-    description: '大好きな人の隣の席にいるのに、話が噛み合いません。どうすればいいですか？',
-    image: 'https://github.com/Tosuke.png',
-    source: {
-      type: 'html',
-      raw: `<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>`
-    }
-  },
-  {
-    slug: 'post2',
-    createdAt: dayjs('2019-12-31'),
-    updatedAt: dayjs('2020-01-01'),
-    tags: [],
-    title: 'Test',
-    description: 'んー、べつにいいんじゃないですかね？',
-    source: {
-      type: 'html',
-      raw: `<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>`
-    }
-  }
-];
+export interface PostRepository {
+  fetchEntries(): Promise<PostEntry[]>;
+  fetchEntry(slug: string): Promise<PostEntry | undefined>;
+  fetchContent(slug: string): Promise<PostContent | undefined>;
+}
 
-class PostRepository {
+class ClientPostRepository implements PostRepository {
   async fetchEntries(): Promise<PostEntry[]> {
     return posts;
   }
@@ -39,13 +17,9 @@ class PostRepository {
     return posts.find(p => p.slug === slug);
   }
 
-  async fetchSource(slug: string): Promise<PostSource | undefined> {
-    return posts.find(p => p.slug === slug)?.source;
-  }
-
-  async fetchContent(slug: string): Promise<string | undefined> {
+  async fetchContent(slug: string): Promise<PostContent | undefined> {
     try {
-      return await http.get(`api/posts/${slug}`).text();
+      return await ky.get(`/api/posts/${slug}`).json();
     } catch (e) {
       console.error(e);
       return undefined;
@@ -53,4 +27,28 @@ class PostRepository {
   }
 }
 
-export const postRepository = new PostRepository();
+class PostRepositoryProxy implements PostRepository {
+  private repo: Promise<PostRepository>;
+
+  constructor() {
+    if (process.browser) {
+      this.repo = Promise.resolve(new ClientPostRepository());
+    } else {
+      this.repo = import('./repository.server').then(m => new m.ServerPostRepository());
+    }
+  }
+
+  async fetchEntries() {
+    return (await this.repo).fetchEntries();
+  }
+
+  async fetchEntry(slug: string) {
+    return (await this.repo).fetchEntry(slug);
+  }
+
+  async fetchContent(slug: string) {
+    return (await this.repo).fetchContent(slug);
+  }
+}
+
+export const postRepository: PostRepository = new PostRepositoryProxy();
